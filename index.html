@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test grilla backbone</title>
+	<link rel="stylesheet" href="http://handsontable.com/dist/handsontable.full.css">
+</head>
+<body>
+	<div id="grilla-test"></div>
+	<div id="grilla-test2"></div>
+	<script src="http://zeptojs.com/zepto.min.js"></script>
+	<script src="http://underscorejs.org/underscore-min.js"></script>
+	<script src="http://backbonejs.org/backbone-min.js"></script>
+	<script src="volatile-persistence.js"></script>
+	<script src="http://handsontable.com/dist/handsontable.full.js"></script>
+	<script src="grillas.js"></script>
+
+	<script>
+	var CarModel = Backbone.Model.extend({}),
+	    CarCollection,
+	    cars;
+
+	CarCollection = Backbone.Collection.extend({
+	    model: CarModel,
+	    ramStorage: new Backbone.ramStorage
+	});
+
+	cars = new CarCollection();
+
+	cars.add([
+		{
+		    make: 'Dodge',
+		    model: 'Ram',
+		    year: 2012,
+		    weight: 6811
+		},
+		{
+		    make: 'Toyota',
+		    model: 'Camry',
+		    year: 2012,
+		    weight: 3190
+		},
+		{
+		    make: 'Smart',
+		    model: 'Fortwo',
+		    year: 2012,
+		    weight: 1808
+		}
+	]);
+
+
+	var el = document.getElementById('grilla-test');
+
+	var hot = setupGrid(el, {
+		backbone: true,
+		collection: cars,
+	    fields: [
+		    {
+		        width: 80,
+		        header: "Make",
+		        data: "make"
+		    },
+		    {
+		        width: 150,
+		        header: "Model",
+		        data: "model"
+		    },
+		    {
+		        width: 150,
+		        header: "Year",
+		        data: "year"
+		    },
+		    {
+		        width: 150,
+		        header: "Weight",
+		        data: "weight"
+		    }
+	    ],
+	    optional: [],
+	    form_name: 'backbone',
+	    name: 'test_backbone'
+	});
+
+	</script>
+</body>
+</html>
